@@ -23,32 +23,38 @@ def scrape():
     news_title = articles.find('div', class_='content_title').text
     news_p = soup.find('div', class_='article_teaser_body').text
     
-    # JPL Mars Space Images
-    jpl_url = 'https://www.jpl.nasa.gov/spaceimages/?search=&category=Mars'
-    browser.visit(jpl_url)
+    # # JPL Mars Space Images
+    # jpl_url = 'https://www.jpl.nasa.gov/spaceimages/?search=&category=Mars'
+    # browser.visit(jpl_url)
 
-    time.sleep(5)
+    # time.sleep(5)
     
+    # html = browser.html
+    # soup = BeautifulSoup(html, 'html.parser')
+
+    # header = soup.find('div', class_='carousel_container')
+    # feature_pic = header.find('article')
+    # pic_background = feature_pic['style']
+    # pic_id = pic_background[53:61]
+    # featured_image_url = f'https://www.jpl.nasa.gov/spaceimages/images/largesize/PIA24152_hires.jpg'
+
+    # Mars Images : Get the latest featured image title and image url 
+    # navigage to correct page     
+    
+    browser.visit(urls['image'])
+    browser.click_link_by_partial_text('FULL IMAGE')
+    browser.click_link_by_partial_text('more info')
+
+    # create BeautifulSoup object; parse with 'html.parser'
     html = browser.html
     soup = BeautifulSoup(html, 'html.parser')
 
-    header = soup.find('div', class_='carousel_container')
-    feature_pic = header.find('article')
-    pic_background = feature_pic['style']
-    pic_id = pic_background[53:61]
-    featured_image_url = f'https://www.jpl.nasa.gov/spaceimages/images/largesize/PIA24152_hires.jpg'
+    # parse soup object 
+    feat_img = soup.find('figure', class_='lede')
 
-    # Mars Weather
-    twitter_url = 'https://twitter.com/marswxreport?lang=en'
-    browser.visit(twitter_url)
+    # modify relative to absolute url 
+    featured_image_url = f'https://www.jpl.nasa.gov{feat_img.a.img["src"]}'
     
-    time.sleep(5)
-
-    html = browser.html
-    soup = BeautifulSoup(html, 'html.parser')
-    
-    tweets = soup.find('div', class_="css-1dbjc4n")
-    mars_weather = tweets.find('div', lang='en').text
 
     # Mars Facts
     facts_url = 'https://space-facts.com/mars/'
@@ -101,7 +107,6 @@ def scrape():
         "news_title": news_title,
         "news_p": news_p,
         "featured_image_url": featured_image_url,
-        "mars_weather": mars_weather,
         "fact_table": table_html,
         "hemispheres_images": hemisphere_image_urls
     }
