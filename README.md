@@ -20,5 +20,5 @@
 
 ![Image of SCRN1](https://github.com/giovannahayes/web-scraping-challenge/blob/main/Mission_to_Mars/Images/Screenshot1.PNG)
 
-![Image of SCRN2](hhttps://github.com/giovannahayes/web-scraping-challenge/blob/main/Mission_to_Mars/Images/Screenshot2.PNG)
+![Image of SCRN2](https://github.com/giovannahayes/web-scraping-challenge/blob/main/Mission_to_Mars/Images/Screenshot2.PNG)
 
